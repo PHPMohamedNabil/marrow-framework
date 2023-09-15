@@ -189,17 +189,19 @@ class TimeZoneStartup implements StartupInterface
 This means that every request to application will set date_default_timezone_set to 'Europe/Moscow' 
 or you can write your other method to change timzone like date_default_timezone_set() builtin php function.
 
+**all startups are run one by one instantiating every class and run (boot) startup method then run register method**
+
 ```php
 <?php
 
 
 use App\Startups\ProductStartup;
-use App\Startups\UserStartup;
+use App\Startups\TimeZoneStartup;
 
 return[
 
      ProductStartup::class,
-     UserStartup::class
+     TimeZoneStartup::class
 
 ];
 
