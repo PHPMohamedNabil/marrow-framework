@@ -6,11 +6,13 @@ get started with new project:
 see the below repo to create new skeleton project.
 https://github.com/PHPMohamedNabil/marrow
 
+**This the first version is and it is under testing**
+
 ## install composer
 after download the project folder just install composer required library in command line
 
 ```php 
-composer require php-mohamed-nabil\core
+composer create-project php-mohamed-nabil\marrow --prefer-dist mymarrowapp
 ```
 
 # Request lifecycle
