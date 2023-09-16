@@ -26,12 +26,12 @@
   {
      "files":
      [
-         "src/core/functions.php",
-         "src/core/process.php"
+         "src/coremvc/functions.php",
+         "src/coremvc/process.php"
      ],
      "psr-4":
      {
-       "Core\\": "src/core/"
+       "Core\\": "src/coremvc/"
      }
   },
     "minimum-stability": "dev",
