@@ -26,8 +26,8 @@
   {
      "files":
      [
-        "src/functions.php",
-         "src/process.php"
+         "src/core/functions.php",
+         "src/core/process.php"
      ],
      "psr-4":
      {
