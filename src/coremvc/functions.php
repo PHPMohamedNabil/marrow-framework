@@ -6,12 +6,12 @@
 *date  : 28-2-2018 11:58 PM
 */
 
-use App\Core\View\Style;
-use App\Core\App;
-use App\Core\Container\Container;
-use App\Core\Route\Router;
-use App\Core\Session\Storage\SessionStorage;
-use App\Core\Session\SessionFactory;
+use Core\View\Style;
+use Core\App;
+use Core\Container\Container;
+use Core\Route\Router;
+use Core\Session\Storage\SessionStorage;
+use Core\Session\SessionFactory;
 
 
 
