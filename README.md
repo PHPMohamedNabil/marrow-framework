@@ -21,17 +21,17 @@ to install db scheme run:
 
 ## controllers and models commands
 
-``` php create_controller (controllername) ``` **create new controller file under controllers folder**
-<br />
-``` php create_controller (controlername) resource ```  **create new resource controller under controllers folder**
-<br />
-``` php create_controller (controlername) resource model ``` **create new resource controller and model file under controllers folder and model folder**
------
-``` php create_controller (controlername) model ``` **create new controller and model file under controllers folder and model folder**
------
-``` php create_model (modelname) ``` **create new model file under models folder**
------
-``` php create_repo (repositoryname) ``` **create new respository file under respositories folder**
+``` php create_controller (controllername) ``` **create new controller file under controllers folder** <br />
+
+``` php create_controller (controlername) resource ```  **create new resource controller under controllers folder** <br />
+
+``` php create_controller (controlername) resource model ``` **create new resource controller and model file under controllers folder and model folder** <br />
+
+``` php create_controller (controlername) model ``` **create new controller and model file under controllers folder and model folder** <br />
+
+``` php create_model (modelname) ``` **create new model file under models folder** <br />
+
+``` php create_repo (repositoryname) ``` **create new respository file under respositories folder** <br />
 
 # env file
 
