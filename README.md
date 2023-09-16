@@ -2,7 +2,7 @@
 
 A project Using a MVC Pattern  bulid from zero with features like (command line micros,routes,template engine,containers,service provider pattern, mysql db,middlewares).
 
-Getstarting with new project:
+get started with new project:
 see the below repo to create new skeleton project.
 https://github.com/PHPMohamedNabil/core
 
