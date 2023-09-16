@@ -4,7 +4,7 @@ A project Using a MVC Pattern  bulid from zero with features like (command line 
 
 get started with new project:
 see the below repo to create new skeleton project.
-https://github.com/PHPMohamedNabil/core
+https://github.com/PHPMohamedNabil/marrow
 
 ## install composer
 after download the project folder just install composer required library in command line
