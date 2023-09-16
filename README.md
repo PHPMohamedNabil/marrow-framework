@@ -12,6 +12,188 @@ after download the project folder just install composer required library in comm
 ```php 
 composer require php-mohamed-nabil\core
 ```
+
+# Request lifecycle
+
+all request to web applications directed to public/index.php file that acts as a front controller for all web application requests
+
+```php
+<?php
+
+define('CoreStart',microtime());
+
+use Core\Request;
+use Core\Response;
+use Core\http\Kernal;
+
+require('autoload.php');
+
+$app= require_once __DIR__.'/../bootstrap'.DS.'bootstrap.php';
+
+$kernal = new Kernal;
+
+$kernal->lightOn();
+
+$kernal->handle(new Request,$app);
+
+$kernal->lightOff();
+
+```
+First thing is creating a application new instance and then run required classes or servicess (startups under startups folders) using kernal class
+to handel application request and then retrun response to the client.
+
+## kernal file 
+
+kernal file it is like a motherboard that conducts,configuraing and preparing all application settings and runs app services : 
+check kenral file core/http/kernal.php:
+```php
+<?php
+
+namespace Core\Http;
+
+use Core\Request;
+use Optimus\Onion\Onion;
+use Core\App;
+use Core\Lightes\LightesFaced;
+use Core\Lightes\Lightes;
+use Dotenv\Dotenv;
+use Core\Session\Storage\SessionStorage;
+use Core\Session\SessionFactory;
+use Spatie\Ignition\Ignition;
+use Core\Configs\Config;
+
+class Kernal{
+
+
+    protected $app_middlewares=[];
+
+    public $lightes;
+
+    public function __construct()
+    {   
+       $dot_env = Dotenv::createMutable(ROOT_PATH);
+       $dot_env->load();
+         
+       app()::$config      = Config::getInstance();
+
+       app()->session      = SessionFactory::create(SessionStorage::class,require_once(SESSION_CONFIG));
+
+       $light_start        = new Lightes(require_once(CONFIG_CONSTAN.'startups.php'));
+        
+       $this->lightes      = new LightesFaced($light_start);
+ 
+       app()->_csrftoken   = session_token();  
+
+          config()->load(CONFIG.DS.'app.php');
+    }
+
+```
+
+# lightes component
+
+this class impelements facede design pattern you can choose or implement all services runs when application requests starts and run services after response returned:
+check core/lightes:
+
+```php
+<?php
+
+namespace Core\Lightes;
+use Core\Lightes\LightesInterface;
+
+
+class Lightes implements LightesInterface{
+     
+    private  $service_rooms;
+
+	public function __construct(array $rooms)
+	{
+        $this->setRoom($rooms);
+	}
+
+	public function setRoom($rooms)
+	{
+
+           $this->service_rooms=$rooms;
+	}
+
+	public function on()
+	{ 
+		
+		foreach($this->service_rooms as $service)
+		{
+			   $service =  app()::$container->get($service);
+              
+			   app()::$container->resloveClassMethod($service,'register');
+			   app()::$container->resloveClassMethod($service,'startup');
+			  
+		}
+
+	}
+
+	
+
+
+	public function off()
+	{
+        
+	}
+
+
+}
+```
+use lightes interface for creating your own facede class implementation :
+```php
+<?php
+
+namespace Core\Lightes;
+
+
+interface LightesInterface{
+
+       public function on();
+
+       public function off();
+}
+```
+
+# Kernal from inside
+
+see kernal handel function takes two parameters first is request object and seconde is application instance:</br>
+
+runs middlewares before and afer application requests and then routes the request to the resource:
+```php
+public function handle(Request $request,App $app)
+    {  
+        $onion =  new Onion;
+        
+        $onion->layer($this->middlewares())->peel($request, function($request){
+                return $request;
+            });
+
+        return $app->run();
+    }
+```
+### kernal light on and light off methods:
+you can see this methods runs every thing before request and after response outputed:
+
+```php
+
+    public function lightOn()
+    {  
+       $this->enviroment();
+       $this->lightes->turnOn();
+       $this->setTimeZone();
+    }
+
+    public function lightOff()
+    {   
+        //after output services here
+         return $this->lightes->turnOff();
+    }
+
+```
+
+
 ## migration commands
 to install db scheme run:
 ``` php migrate ``` **run all migrations**
