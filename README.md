@@ -20,11 +20,11 @@ to install db scheme run:
 ``` php migrate role=(migration_name)``` **rollback migration_name file**
 
 ## controllers and models commands
-to install db scheme run:
+
 ``` php create_controller (controllername) ``` **create new controller file under controllers folder**
------
+<br />
 ``` php create_controller (controlername) resource ```  **create new resource controller under controllers folder**
------
+<br />
 ``` php create_controller (controlername) resource model ``` **create new resource controller and model file under controllers folder and model folder**
 -----
 ``` php create_controller (controlername) model ``` **create new controller and model file under controllers folder and model folder**
