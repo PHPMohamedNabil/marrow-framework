@@ -12,7 +12,7 @@ https://github.com/PHPMohamedNabil/marrow
 after download the project folder just install composer required library in command line
 
 ```php 
-composer create-project php-mohamed-nabil/marrow --prefer-dist mymarrowapp
+composer create-project php-mohamed-nabil/marrow --prefer-dist myapp
 ```
 
 # Request lifecycle
