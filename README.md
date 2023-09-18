@@ -1,9 +1,9 @@
 # Marrow MVC architecture
 ![marrow](https://github.com/PHPMohamedNabil/marrow-framework/assets/29188634/7bdc6061-86e4-4623-9f48-f6a2862e0256)
 
-A project Using a MVC Pattern  bulid from zero with features like (command line micros,routes,template engine,containers,service provider pattern, mysql db,middlewares).
-
+A project Using a MVC Pattern build from zero with features like (command line micros,routes,template engine,containers,service provider pattern, mysql db,middlewares).
 get started with new project:
+
 see the below repo to create new skeleton project.
 https://github.com/PHPMohamedNabil/marrow
 
@@ -94,7 +94,7 @@ class Kernal{
 
 # lightes component
 
-this class impelements facede design pattern you can choose or implement all services runs when application requests starts and run services after response returned:
+This class implements design pattern you can choose or implement all services runs when application requests starts and run services after response returned:
 check core/lightes:
 
 ```php
