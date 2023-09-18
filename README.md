@@ -283,6 +283,27 @@ Route::middlewares('api',function(){
 
 });
 ```
+## routes placeholders
+create route placeholders just but : before the placholder:
+```php
+
+use App\Core\Route\Router as Route;
+use App\Controllers\ProductController;
+use App\Controllers\UserController;
+
+Route::get('/user/:id',[UserController::class,'profile']);
+```
+### routes regx route
+make regex routes with method regx just write your own regular expressions (without regx delemeters):
+
+```php
+
+use App\Core\Route\Router as Route;
+use App\Controllers\ProductController;
+use App\Controllers\UserController;
+
+Route::get('/user/:id',[UserController::class,'profile'])->regx('(\d+)$');
+```
 ## App routes list 
 run command ** php route_list** to see app routes
 
