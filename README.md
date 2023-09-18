@@ -1,7 +1,7 @@
 # Marrow MVC architecture
 ![marrow](https://github.com/PHPMohamedNabil/marrow-framework/assets/29188634/7bdc6061-86e4-4623-9f48-f6a2862e0256)
 
-A project Using a MVC Pattern build from zero with features like (command line micros,routes,template engine,containers,service provider pattern, mysql db,middlewares).
+A php framework Using  MVC design pattern build from zero with features like (command line micros,routes,template engine,containers,service provider pattern, mysql db,middlewares), help ypu understand poupler frameworks and how it works and operating from inside.
 get started with new project:
 
 see the below repo to create new skeleton project.
