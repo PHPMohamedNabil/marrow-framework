@@ -431,4 +431,4 @@ The concept of large framworks (middlewares,pipeline,repositories,commands,migra
 ![core_exception](https://github.com/PHPMohamedNabil/Core-MVC-PHP/assets/29188634/7e2ef83e-c961-4a09-9744-c3f059b507ec)
 
 
-finally change directory to public folder from command line and run php -S localhost:8000 (run built in php server)  
+finally run php marrow to start your project on localhost:8000 or ex: run php marrow (port number) php marrow 4500 
