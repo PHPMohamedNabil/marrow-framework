@@ -4,7 +4,7 @@ namespace Core\Validation;
 
 use Rakit\Validation\Validator;
 use Core\Url;
-use App\Request;
+use Core\Request;
 
 class Validate{
 
