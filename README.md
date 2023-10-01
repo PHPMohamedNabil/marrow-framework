@@ -9,14 +9,33 @@ https://github.com/PHPMohamedNabil/marrow
 
 # **This the first version  and it is under testing**
 
-## install composer
+Table of contents
+=================
+
+<!--ts-->
+   * [Installation](#installation)
+   * [Request Lifecycle](#Request-lifecycle)
+      * [Kernal File](#kernal-file)
+      * [Sections](#sections)
+      * [Hard Compiling](#hard-compiling-feature)
+      * [Including View](#including-view)
+      * [Foreach loop](#foreach-loop)
+      * [Html Creation](#html-creation)
+      * [Printing Vars](#printing-vars)
+      * [Terminate the code](#terminate-the-code)
+      * [Printing html Content](#printing-html-content)
+      * [Table of expressions](#Expressions-of-statments)
+   * [Licence](#licence)
+<!--te-->
+
+# installation
 after download the project folder just install composer required library in command line
 
 ```php 
 composer create-project php-mohamed-nabil/marrow --prefer-dist myapp
 ```
 
-# Request lifecycle
+# Request-lifecycle
 
 all request to web applications directed to public/index.php file that acts as a front controller for all web application requests
 
@@ -45,7 +64,7 @@ $kernal->lightOff();
 First thing is creating a application new instance and then run required classes or servicess (startups under startups folders) using kernal class
 to handel application request and then retrun response to the client.
 
-## kernal file 
+## kernal-file 
 
 kernal file it is like a motherboard that conducts,configuraing and preparing all application settings and runs app services : 
 check kenral file core/http/kernal.php:
