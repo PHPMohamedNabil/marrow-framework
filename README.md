@@ -16,15 +16,12 @@ Table of contents
    * [Installation](#installation)
    * [Request Lifecycle](#Request-lifecycle)
       * [Kernal File](#kernal-file)
-      * [Sections](#sections)
-      * [Hard Compiling](#hard-compiling-feature)
-      * [Including View](#including-view)
-      * [Foreach loop](#foreach-loop)
-      * [Html Creation](#html-creation)
-      * [Printing Vars](#printing-vars)
-      * [Terminate the code](#terminate-the-code)
-      * [Printing html Content](#printing-html-content)
-      * [Table of expressions](#Expressions-of-statments)
+      * [Kernal-from-inside](#Kernal-from-inside)
+      * [Routes](#Routes)
+      * [Style-template-engine](#Style-template-engine)
+      * [Middlewares](#Middlewares)
+      * [Controllers](#Controlers)
+      * [Models&Database](#Models&Database)
    * [Licence](#licence)
 <!--te-->
 
@@ -111,10 +108,13 @@ class Kernal{
 
 ```
 
-# lightes component
+# lightes-component
+
 
 This class implements design pattern you can choose or implement all services runs when application requests starts and run services after response returned:
 check core/lightes:
+
+**Applying on facade pattern**
 
 ```php
 <?php
@@ -178,7 +178,7 @@ interface LightesInterface{
 }
 ```
 
-# Kernal from inside
+# Kernal-from-inside
 
 see kernal handel function takes two parameters first is request object and seconde is application instance:</br>
 
@@ -216,7 +216,7 @@ you can see this methods runs every thing before request and after response outp
 ```
 
 
-## migration commands
+## migration-commands
 to install db scheme run:
 ``` php migrate ``` **run all migrations**
 ``` php create_migration (migration_name) ``` **create new migration file in migration folder**
@@ -328,7 +328,7 @@ run command ** php route_list** to see app routes
 
 ![routelist](https://github.com/PHPMohamedNabil/PHP-Navtive-JWT-API/assets/29188634/5fd13226-1a22-4745-9a0d-12caddfee243)
 
-## Style template engine
+## Style-template-engine
 marrow uses style template engine it is an fast and powerfull php template engine build from native code with strong featues like (template inheritance,template sections and hard compile feature)
 see style documentation here :[style](https://github.com/PHPMohamedNabil/Style) 
 
@@ -379,12 +379,13 @@ return[
 ];
 ```
 
-# service provider
+# Service-providers
 
 create application service provider (classess and servicess runs before application bootstraped).
 this classes you can create under startup folder and assign it to startups array in app\config\startup.php.
 
-## create startup
+**Applying on Container Pattern (Inversion of control)**
+
 go to startup folder and create new file example : 
 TimeZoneStartup.php for setting default timezone before app startsup (before every request to application)
 **like service providers in laravel framwork**
@@ -442,12 +443,112 @@ return[
 ];
 
 ```
+# Controllers
+
+acting like controller system in laravel (emulate most)
+you can assign middleware at constructor function:
+
+```php
+<?php
+
+namespace App\Controllers;
+
+use Core\Controller;
+use Style\Style;
+use Core\Request;
+
+class HomeController extends Controller
+{  
+	  
+
+	 public function __construct()
+	 {
+	 	//middleware_array,except_methods array(optional)
+        $this->middleware(['test',['home']]);
+	 }
+
+```
+
+# Models&Database
+
+just create models like any framworks but it is uses native db (no ORM libaraies here).
+
+```php
+
+<?php
+
+namespace App\Models;
+
+use Core\Model;
+
+class UserModel extends Model
+{  
+	//you have to set table attributes her $id,$column_2,$column_3 ...
+	//you should set table name attribute or we can predict it like User to be users ,UserCategory user_categories 
+	
+}
+
+```
+connecting to database like this : 
+**all models returns object of model data**
+```php
+             // $model = new user(12);
+		//$model->columns['model_title']='updated';   
+		//$model->columns['model_price']=2500000;  
+         
+       
+        //$model->create(['model_title'=>'coding model']); //for mass assignment
+		//$model->save(); //for insert
+		//$model->amend();// for update
+		//$model->purge(); //for delete
+		//$model->deleteSoft(12); //for soft delete  
+
+```
+or like this :
+
+```php
+ $user = new user;
+$user->get() // all users
+$user->get(12) //user with id = 12
+$user->create(['username'=>'hambola','password'=>123]); // create new user hambola with new password
+$user->purge(12); remove user number  12 with (id=12)
+$user->update($this->model->table,['username'=>'hmobla edited'],['id'=>12]); edit user hambola with id =12
+```
+#NativeDB-class
+you can create custom queries easy and fast using this class :
+
+```php
+<?php
+
+namespace App\Repositories;
+
+use App\Repositories\ProductRepositoryInterface;
+use App\Models\Product;
+use App\Core\Database\NativeDB;
+```
+```php
+ $users = NativeDB::getInstance()->table('users')->paginate(10); returns array first element is data object ,seconde is key 'links' which has pagination links
+ $links = $users?$users['links']:[];
+
+             foreach($users[0] as $user)
+              {
+                 echo $user->username.':'.$user->id;
+              }
+
+NativeDB::getInstance()->table('users')->select('username')->limit(10)->run();  //username from users table limi 10 records
+NativeDB::getInstance()->table('users')->select('username')->where('id','=',12)->run(); //username from users table where id =12
+NativeDB::getInstance()->table('users')->select('username')->where('id','=',12)->where('username','=','hambola')->run();   //username from users table where id =12 and username = hambola
+NativeDB::getInstance()->table('users')->select('username')->group_by('id')->run(); //username from users table groub by id
+NativeDB::getInstance()->table('users')->insertInto(['username'=>'hambola brother'])->run(); //insert new user from users table
+NativeDB::getInstance()->table('users')->deleteRow(['username'=>'hambola brother'])->run(); // delete where username hambola borhter
+NativeDB::getInstance()->table('users')->updateRow(['username'=>'hambola sister'],['id'=>13],$whereoperator='',$soft_delete=false)->run(); // update  where id = 13 (keep two last params as example till further updates).
+```
+
+# Exceptions:
+has a special custome style using ignition libarary
+![core_exception](https://github.com/PHPMohamedNabil/Core-MVC-PHP/assets/29188634/7e2ef83e-c961-4a09-9744-c3f059b507ec)
 
 
 The concept of large framworks (middlewares,pipeline,repositories,commands,migrations,containers,configs,template-engine)
-
-# Exceptions:
-![core_exception](https://github.com/PHPMohamedNabil/Core-MVC-PHP/assets/29188634/7e2ef83e-c961-4a09-9744-c3f059b507ec)
-
 
 finally run php marrow to start your project on localhost:8000 or ex: run php marrow (port number) php marrow 4500 
