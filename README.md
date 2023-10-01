@@ -20,8 +20,8 @@ Table of contents
       * [Routes](#Routes)
       * [Style-template-engine](#Style-template-engine)
       * [Middlewares](#Middlewares)
-      * [Controllers](#Controlers)
-      * [Models&Database](#Models&Database)
+      * [Controllers](#Controllers)
+      * [Models&Database](#Models-Database)
    * [Licence](#licence)
 <!--te-->
 
@@ -348,7 +348,7 @@ change SUTE_URL constant to your website or localhost url that has a document ro
 # _tcsrf
 this a csrf token parameter you have to send it along with any post request (check cookies to get the full csrf token ) see like that:
 
-# Middlwares 
+# Middlewares 
 
 create application general middlwares or routes middlewares from config/middlewares.php and disable remove csrf middleware from middlewares array.
 
@@ -469,7 +469,7 @@ class HomeController extends Controller
 
 ```
 
-# Models&Database
+# Models-Database
 
 just create models like any framworks but it is uses native db (no ORM libaraies here).
 
@@ -490,7 +490,9 @@ class UserModel extends Model
 
 ```
 connecting to database like this : 
+
 **all models returns object of model data**
+
 ```php
              // $model = new user(12);
 		//$model->columns['model_title']='updated';   
