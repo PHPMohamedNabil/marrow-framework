@@ -22,6 +22,7 @@ Table of contents
       * [Middlewares](#Middlewares)
       * [Controllers](#Controllers)
       * [Models&Database](#Models-Database)
+      * [creating-migration-file](#creating-migration-file)
    * [Licence](#licence)
 <!--te-->
 
@@ -484,7 +485,8 @@ use Core\Model;
 class UserModel extends Model
 {  
 	//you have to set table attributes her $id,$column_2,$column_3 ...
-	//you should set table name attribute or we can predict it like User to be users ,UserCategory user_categories 
+	//you should set table name attribute or we can predict it like User to be users ,UserCategory user_categories
+    protected $mass = ['username','email']; // for mass assignment
 	
 }
 
@@ -516,7 +518,7 @@ $user->create(['username'=>'hambola','password'=>123]); // create new user hambo
 $user->purge(12); remove user number  12 with (id=12)
 $user->update($this->model->table,['username'=>'hmobla edited'],['id'=>12]); edit user hambola with id =12
 ```
-#NativeDB-class
+# NativeDB-class
 you can create custom queries easy and fast using this class :
 
 ```php
@@ -536,7 +538,8 @@ use App\Core\Database\NativeDB;
               {
                  echo $user->username.':'.$user->id;
               }
-
+```
+```php
 NativeDB::getInstance()->table('users')->select('username')->limit(10)->run();  //username from users table limi 10 records
 NativeDB::getInstance()->table('users')->select('username')->where('id','=',12)->run(); //username from users table where id =12
 NativeDB::getInstance()->table('users')->select('username')->where('id','=',12)->where('username','=','hambola')->run();   //username from users table where id =12 and username = hambola
@@ -545,6 +548,44 @@ NativeDB::getInstance()->table('users')->insertInto(['username'=>'hambola brothe
 NativeDB::getInstance()->table('users')->deleteRow(['username'=>'hambola brother'])->run(); // delete where username hambola borhter
 NativeDB::getInstance()->table('users')->updateRow(['username'=>'hambola sister'],['id'=>13],$whereoperator='',$soft_delete=false)->run(); // update  where id = 13 (keep two last params as example till further updates).
 ```
+## creating-migration-file
+First **run command php create_migration users_table** (replace users_table by your migration file name ).
+it will create a new file users_table_date_time_000 under migration folder
+```php
+<?php
+
+namespace App\Migrations;
+
+use Core\Database\NativeDB;
+
+class users__2023_09_03_17_56_59{
+      
+     //$db for database object
+	public function up($db)
+	{
+          $db->query('CREATE TABLE IF NOT EXISTS  `users` (
+                 `id` BIGINT NOT NULL AUTO_INCREMENT,
+                 `username` varchar(256) NOT NULL,
+                 `password` VARCHAR(255) NOT NULL ,
+                 `created` datetime NOT NULL,
+				 `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				PRIMARY KEY (`id`)
+
+             )');
+           
+
+	}
+
+     public function down($db)
+     { 
+
+       $db->query('DROP TABLE users');
+
+     }
+```
+after making migration file with sql scheme run** php migrate** iw will run all migration files and commit it all.
+to rollback your migration run php migrate rollback your  migration run **php migrate roll=users__2023_09_03_17_56_59 **
+for rollback all migration run **php migrate roll=all**
 
 # Exceptions:
 has a special custome style using ignition libarary
