@@ -329,7 +329,7 @@ run command ** php route_list** to see app routes
 ![routelist](https://github.com/PHPMohamedNabil/PHP-Navtive-JWT-API/assets/29188634/5fd13226-1a22-4745-9a0d-12caddfee243)
 
 ## Style-template-engine
-marrow uses style template engine it is an fast and powerfull php template engine build from native code with strong featues like (template inheritance,template sections and hard compile feature)
+marrow uses style template engine it is an fast and powerfull php template engine built from native code with strong featues like (template inheritance,template sections and hard compile feature)
 see style documentation here :[style](https://github.com/PHPMohamedNabil/Style) 
 
 ## App url 
