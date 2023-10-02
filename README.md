@@ -27,7 +27,6 @@ Table of contents
 <!--te-->
 
 # installation
-after download the project folder just install composer required library in command line
 
 ```php 
 composer create-project php-mohamed-nabil/marrow --prefer-dist myapp
