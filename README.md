@@ -587,7 +587,7 @@ to rollback your migration run php migrate rollback your  migration run **php mi
 for rollback all migration run **php migrate roll=all**
 
 # Exceptions:
-has a special custome style using ignition libarary
+has a special custom style using ignition libarary
 ![core_exception](https://github.com/PHPMohamedNabil/Core-MVC-PHP/assets/29188634/7e2ef83e-c961-4a09-9744-c3f059b507ec)
 
 
