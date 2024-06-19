@@ -4,7 +4,6 @@
   "keywords": ["mvc","php","php8","php-framwork","oop","mysql","php-mvc","api"],
   "type": "project",
   "require": {
-    "php": ">=8.0",
     "respect/validation": "^2.2",
     "intervention/image": "^2.7",
     "nesbot/carbon": "^2.67",
@@ -16,7 +15,6 @@
     "doctrine/inflector": "2.0.x-dev",
     "symfony/password-hasher": "5.4.x-dev",
     "php-mohamed-nabil/style": "dev-master",
-    "filp/whoops": "^2.15",
     "league/booboo": "dev-main",
     "spatie/ignition": "^1.9",
     "httpsoft/http-server-request": "dev-master",
