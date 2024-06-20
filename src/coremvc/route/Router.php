@@ -608,12 +608,17 @@ class Router {
             throw new BadMethodCallException("Method not Allowed expecting :".implode(',',$this->valid_methods));
        }
 
+       if($this->matchStaticRoute($path))
+       {
+          return $this->matchStaticRoute($path);
+       }
+        
        foreach(array_reverse($this->routes) as $route)
        {   
-            if($this->matchRouteHolder($route['pattern'],$path,$route['handler'],$route['method']))
-            {       
 
-                 if($this->matchMethods($route['method'],$method))
+            if($this->matchRouteHolder($route['pattern'],$path,$route['handler'],$route['method']))
+            {
+                if($this->matchMethods($route['method'],$method))
                  {
                     return  $this->matchRouteHolder($route['pattern'],$path,$route['handler'],$route['method']);
                  }
@@ -627,6 +632,7 @@ class Router {
                      return ['bad'=>$route['method']];
                  }
             }
+
     
        }
 
@@ -680,6 +686,30 @@ class Router {
      }
      
 
+   }     //  /category/:id
+     //  /post/sadasdasd
+    //  
+   public function matchStaticRoute($path)
+   {
+    //the request url to match against
+
+         foreach($this->routes as $route)
+         {
+           
+             if(preg_match_all('#\:([\w]+\??)#',$route['pattern'],$match))
+             {
+                  continue;
+             }
+             elseif(rtrim($route['pattern'],'/') == rtrim($path,'/'))
+             {  // dd($match);
+               return ['path'=>$path,'handler'=>$route['handler'],'pattern'=>$route['pattern']];
+             }
+             else
+             {
+                 continue;
+             }
+
+         }
    }
 
    public static function __callStatic(string $method,array $params)
