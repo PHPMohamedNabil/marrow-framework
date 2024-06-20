@@ -9,14 +9,20 @@ use Core\Request;
 class Validate{
 
 
-    public static function validate(array $rules,$body,$json=null)
+    public static function validate(array $rules,$body,$json=null,$custom_rules=[])
     {
         $validator = new Validator;
+        
+      if(count($custom_rules)>1)
+      {
+         $validator->addValidator($custom_rules[0],$custom_rules[1]);
+      }
 
         $validation = $validator->validate($_POST + $_FILES,$rules);
       
         $errors = $validation->errors();
-     	  
+     
+     
 
       if ($validation->fails())
       {
