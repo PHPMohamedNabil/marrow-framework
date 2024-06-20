@@ -194,9 +194,9 @@ class Request{
 	  return isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:null;
 	}
 
-	public function validate($rules,$json=null)
+	public function validate($rules,$json=null,$custom_rules=[])
 	{
-		 return Validate::validate($rules,$this,$json);
+		 return Validate::validate($rules,$this,$json,$custom_rules);
 	}
 
 	public function session()
